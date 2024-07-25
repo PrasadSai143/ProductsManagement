@@ -1,0 +1,66 @@
+<app-header></app-header>
+
+<div class="container pt-5">
+    <div class="card-title">
+        <h1>Products</h1>
+    </div>
+    <div class="row" *ngIf="isVendorUser">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6" style="margin-left: 0px;">
+            <a class="btn btn-primary" style="float: right;width: 225px;height: 40px;" data-bs-toggle="modal"
+                href="#exampleModalToggle2" role="button">Add Product</a>
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-5 g-5 pt-5">
+        <div class="col" *ngFor="let product of productList">
+            <div class="card" style="width: 14rem;">
+                <img class="card-img-top" style="height: 8rem;" [src]="product.photo" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.name}}</h5>
+                    Price: <span>{{product.price | currency: 'INR'}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+    tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
+                <button type="button" #closebutton class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-group" [formGroup]="productForm" (submit)="saveProduct()">
+                    <div class="mb-3">
+                        <input name="name" class="form-control mt-1" formControlName="name" type="text" ngModel
+                            placeholder="Product Name">
+                        <div *ngIf="(f['name'].touched || f['name'].dirty) && f['name'].invalid">
+                            <div *ngIf="f['name'].errors?.['required']" class="text-danger">Product name is required</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <input name="price" class="form-control mt-1" formControlName="price" type="number" ngModel
+                            placeholder="Product Price">
+                        <div *ngIf="(f['price'].touched || f['price'].dirty) && f['name'].invalid">
+                            <div class="text-danger">Product price is required</div>
+                        </div>
+                    </div>
+                    <div class="mb-3 mt-2">
+                        <label for="formFile" class="form-label bold">Product Image</label>
+                        <input (change)="this.onFilechange($event)" class="form-control" name="photo" formControlName="photo"
+                            type="file" id="formFile">
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-primary" id="closeModal" type="submit">Add Product</button>
+                        <button class="btn btn-warning" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
+                            data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

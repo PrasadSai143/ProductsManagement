@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "id": 123,
+      "userName": "testcustomer",
+      "password": "123456789",
+      "isVendorUser": 0
+    },
+    {
+      "id": 1234,
+      "userName": "testvendor",
+      "password": "123456789",
+      "isVendorUser": 1
+    }
+  ],
+  "Products": [
+    {
+      "id": "b3f7",
+      "name": "Test",
+      "price": 2121,
+      "photo": "Test.png"
+    },
+    {
+      "id": "4718",
+      "name": "Test",
+      "price": 2121,
+      "photo": "Test.png"
+    },
+    {
+      "id": "bef0",
+      "name": "54545",
+      "price": 12121,
+      "photo": "my-photo.png"
+    },
+    {
+      "id": "f312",
+      "name": "jhjahsa",
+      "price": 1212,
+      "photo": "Photo.png"
+    },
+    {
+      "id": "deb9",
+      "name": "asdaddas",
+      "price": 121,
+      "photo": "my-visa-photo.jpg"
+    },
+    {
+      "id": "db21",
+      "name": "asdsadas1212",
+      "price": 1212,
+      "photo": "FixedPhoto.jpeg"
+    }
+  ]
+}

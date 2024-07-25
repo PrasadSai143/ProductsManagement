@@ -1,0 +1,18 @@
+<main class="main">
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <h4 style="color: cadetblue;padding: 0px 15px;">PRODUCT MANAGEMENT</h4>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div style="float: right;">
+                <div *ngIf="isUserLoggedIn">
+                    <button class="btn btn-primary" type="button" (click)="logout()">Logout</button>
+            </div>
+            </div>
+        </nav>
+    </div>
+</main>
