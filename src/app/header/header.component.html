@@ -1,4 +1,4 @@
-<main class="main">
+<!-- <main class="main">
     <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">
@@ -8,11 +8,37 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div style="float: right;">
+            <div class="d-flex" style="float: right;">
                 <div *ngIf="isUserLoggedIn">
                     <button class="btn btn-primary" type="button" (click)="logout()">Logout</button>
-            </div>
+                </div>
             </div>
         </nav>
     </div>
-</main>
+</main>  -->
+<div class="topnav">
+
+    <a class="navbar-brand" routerLink="{{homeRouter}}">
+        <h4 style="color: rgb(15, 29, 92);padding: 0px 15px;">PRODUCT MANAGEMENT</h4>
+    </a>
+    <a class="navbar-brand" routerLink="{{homeRouter}}">Home</a>
+    <a class="navbar-brand" routerLink="{{productRouter}}">Products</a>
+    <div class="login-container" *ngIf="!isUserLoggedIn">
+        <form class="form-group" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="row d-flex">
+                <div class="col-md-4">
+                    <input name="userName" class="form-control" type="text" formControlName="userName" placeholder="User Name">
+                </div>
+                <div class="col-md-4">
+                    <input type="password" class="form-control" name="password" formControlName="password" placeholder="Password">
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary" type="submit">Login</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="login-container" *ngIf="isUserLoggedIn">
+        <app-profile username="userName" (logoutEvent)="logout()"></app-profile>
+    </div>
+  </div>

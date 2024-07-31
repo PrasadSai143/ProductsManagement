@@ -3,13 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { AuthGuard } from './gaurds/auth.guard';
+import { HomeComponent } from './home/home.component';
 
 
 const routes: Routes = [{
-  path: '', redirectTo: '/login', pathMatch: 'full'
+  path: '', redirectTo: '/home', pathMatch: 'full'
 },
 {
-  path: 'login', component: LoginComponent
+  path:'home', component: HomeComponent
 },
 {
   path: 'product/productlist', component: ProductListComponent, canActivate: [AuthGuard]

@@ -27,8 +27,19 @@ export class LoginComponent implements OnInit {
       console.log(this.loginForm.value);
       this.authService.login(this.loginForm.value)
       .subscribe((data: any) => {
+          let user = data.data.user;
+          let token = data.data.token.access_token
+          if ((user != null || undefined) && (token != null || undefined)) {
+            console.log(user);
+            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('token', JSON.stringify(token));
+          }
           this.router.navigate(['/product/productlist']);
       });
+
+      if(this.authService.login(this.loginForm.value) != undefined || null){
+        this.router.navigate(['/product/productlist']);
+      }
     }
   }
 

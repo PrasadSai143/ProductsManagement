@@ -1,33 +1,59 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import { BehaviorSubject, map, Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { User } from '../models/user.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  baseUrl = 'http://localhost:5000';
-  public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  constructor(private httpClient: HttpClient){}
+  baseUrl = `${environment.BASE_URL}user`;
+  public user: BehaviorSubject<User> =
+    new BehaviorSubject<User>(new User('','','','','','', false));
+  users = [
+    {
+      id: 123,
+      userName: 'testcustomer',
+      password: '123456789',
+      isVendorUser: 0,
+    },
+    {
+      id: 1234,
+      userName: 'testvendor',
+      password: '123456789',
+      isVendorUser: 1,
+    },
+  ];
+
+  constructor(private httpClient: HttpClient) {}
 
   login(data: any) {
-
-    return this.httpClient.get(`${this.baseUrl}/users`)
-      .pipe(map((result:any) => {
-       console.log(result)
-        let user = result.find((x: { userName: any; password: any; }) => x.userName === data.userName && x.password === data.password)
-        if(user != null || undefined){
-            localStorage.setItem('authUser', JSON.stringify(user));
-        }
-        return user;
-      }));
+    const encodeuser = btoa(JSON.stringify(data));
+    let headerDict = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'X-AUTH': `Basic ${encodeuser}`
+    }
+    const requestOptions = {headers: new HttpHeaders(headerDict)};
+    return this.httpClient.post(`${this.baseUrl}/login`,null,requestOptions)
   }
 
   isLoggedIn() {
-    return localStorage.getItem('authUser') !== null;
+    return localStorage.getItem('token') !== null;
+  }
+
+  getUser(){
+    return JSON.stringify(localStorage.getItem('user'));
+  }
+
+  getToken(){
+    return JSON.stringify(localStorage.getItem('token'));
   }
 
   logout() {
-    localStorage.removeItem('authUser');
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
   }
 }

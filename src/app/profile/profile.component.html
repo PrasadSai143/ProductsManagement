@@ -1,0 +1,37 @@
+<div class="row">
+	<div class="col nav-profile">
+		<div ngbDropdown class="d-inline-block" placement="bottom-right" autoClose="outside">
+			<div ngbDropdownToggle class="show-profile">
+        <div class="dv-profile">
+            <div class="user-picture background">
+              {{ initNameIcon() }}
+            </div>
+          </div>
+        <button class="btn btn-primary text-dark" id="dropdownForm1">{{username}}</button>
+      </div>
+      <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+        <div class="px-2 py-2">
+          <div class="dv-profile">
+            <div class="user-picture background">
+              {{ initNameIcon() }}
+            </div>
+          </div>
+          <div class="dv-profile">
+            <div class="user-profile">
+              {{username}}
+            </div>
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="px-2 py-2 dv-control">
+            <button class="btn btn-primary text-dark mx-2" (click)="onShowProfile()">Profile</button>
+            <button class="btn btn-primary text-dark mx-2" (click)="onLogout()">Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
