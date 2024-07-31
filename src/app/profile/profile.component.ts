@@ -4,7 +4,6 @@ export function isDefined(value: any): boolean {
   return value !== undefined && value !== null;
 }
 
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
